@@ -104,7 +104,7 @@
 
                 <div class="title">产品管理</div>
             </div>
-            <div class="shortcut" >
+            <div class="shortcut" onclick="popup('客户管理','client_list')">
                 <img class="icon" src="./win10/img/icon/download.png"/>
 
                 <div class="title">跟单管理</div>

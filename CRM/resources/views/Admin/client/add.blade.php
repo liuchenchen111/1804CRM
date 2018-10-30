@@ -32,13 +32,24 @@
         <div class="layui-inline">
             <label class="layui-form-label">客户类型</label>
             <div class="layui-input-block">
-                <input type="text" name="type" id="date1" autocomplete="off" class="layui-input">
+                <select name="type">
+                    <option value="1">已成交</option>
+                    <option value="2">未成交</option>
+                    <option value="3" >跟进中</option>
+                    <option value="4">有意向</option>
+                </select>
             </div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">客户级别</label>
             <div class="layui-input-inline">
-                <input type="text" name="level" autocomplete="off" class="layui-input">
+                <select name="level">
+                    <option value="1">vip1</option>
+                    <option value="2">vip2</option>
+                    <option value="3" >vip3</option>
+                    <option value="4">vip4</option>
+                    <option value="5">vip5</option>
+                </select>
             </div>
         </div>
     </div>
@@ -46,7 +57,12 @@
         <div class="layui-inline">
             <label class="layui-form-label">客户来源</label>
             <div class="layui-input-block">
-                <input type="text" name="from" id="date1" autocomplete="off" class="layui-input">
+                <select name="detail">
+                    <option value="1">电话营销</option>
+                    <option value="2">搜索引擎</option>
+                    <option value="3" >朋友介绍</option>
+                    <option value="4">其他来源</option>
+                </select>
             </div>
         </div>
         <div class="layui-inline">
@@ -66,7 +82,12 @@
         <div class="layui-inline">
             <label class="layui-form-label">职位</label>
             <div class="layui-input-inline">
-                <input type="text" name="position" autocomplete="off" class="layui-input">
+                <select name="position">
+                    <option value="1">总监</option>
+                    <option value="2">业务员</option>
+                    <option value="3" >董事长</option>
+                    <option value="4">总经理</option>
+                </select>
             </div>
         </div>
     </div>
@@ -76,20 +97,20 @@
         <label class="layui-form-label">所在地区</label>
         <div class="layui-input-inline">
             <select name="pro">
-                <option value="">请选择省</option>
-                <option value="浙江" selected="">浙江省</option>
-                <option value="你的工号">江西省</option>
-                <option value="你最喜欢的老师">福建省</option>
+                <option value="1">请选择省</option>
+                <option value="2" >浙江省</option>
+                <option value="3">江西省</option>
+                <option value="4">福建省</option>
             </select>
         </div>
         <div class="layui-input-inline">
             <select name="ciy">
-                <option value="">请选择市</option>
-                <option value="杭州">杭州</option>
-                <option value="宁波" disabled="">宁波</option>
-                <option value="温州">温州</option>
-                <option value="温州">台州</option>
-                <option value="温州">绍兴</option>
+                <option value="1">请选择市</option>
+                <option value="2">杭州</option>
+                <option value="3" disabled="">宁波</option>
+                <option value="4">温州</option>
+                <option value="5">台州</option>
+                <option value="6">绍兴</option>
             </select>
         </div>
 
@@ -136,7 +157,12 @@
                 type:'post',
                 async:false,
                 success:function(json_msg){
-
+                    if(json_msg.code=='1000'){
+                        layui.layer.msg(json_msg.font,{icon:6});
+                       
+                    }else{
+                        layui.layer.msg(json_msg.font,{icon:5});
+                    }
                 }
             });
             return false;

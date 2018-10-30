@@ -10,16 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*首页*/
 Route::get('/', function () {
-    return view('index');
+    return view('admin.index');
 });
-
 /*客户列表*/
-Route::get('client_list',function(){
-    return view('client.index');
-});
+Route::any('client_list','Admin\ClientController@client_list');
+
 /*新增客户*/
-Route::any('client_add','ClientController@client_add');
+Route::any('client_add','Admin\ClientController@client_add');
+
 /*新增客户操作*/
-Route::any('client_add_db','ClientController@client_add_db');
+Route::any('client_add_db','Admin\ClientController@client_add_db');

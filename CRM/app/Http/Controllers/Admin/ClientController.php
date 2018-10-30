@@ -1,21 +1,25 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use \App\Http\Controllers\Controller;
+
 
 class ClientController extends Controller
 {	
 	/*首页*/
 	public function client_list(){
 		
-		return view('client.index');
+		return view('admin.client.index');
 	}
 
     /*添加客户*/
     public function client_add(){
-        return view('client.add');
+
+        return view('admin.client.add');
+
     }
 
     /*添加客户操作*/
@@ -30,17 +34,23 @@ class ClientController extends Controller
         $insert['client_type'] = $data['arr']['type'];
         $insert['client_level'] = $data['arr']['level'];
         $insert['client_from'] = $data['arr']['title'];
-        $insert['crop_name'] = $data['arr']['crop'];
+        $insert['corp_name'] = $data['arr']['crop'];
         $insert['province'] = $data['arr']['pro'];
         $insert['city'] = $data['arr']['ciy'];
         $insert['area_detail'] = $data['arr']['detail'];
+        $insert['client_remark'] = $data['arr']['remark'];
         $insert['client_ctime'] = time();
         $insert['client_status'] = 1;
         $insert['admin_id'] = 1;//管理员id
 
         //插入数据库
         $res = DB::table('client')->insert($insert);
-        echo $res;
+        if($res){
+            return ['code'=>1000,'font'=>'添加成功'];
+        }else{
+            return ['code'=>1,'font'=>'添加失败'];
+        }
+
 
     }
 

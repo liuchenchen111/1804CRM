@@ -65,7 +65,11 @@
             shadeClose: true,
             maxmin: true, //开启最大化最小化按钮
             area: ['1000px', '500px'],
-            content: '/index.php/client_add'
+            content: '/index.php/client_add',
+            end: function () {
+                window.location.reload();
+            }
+
         });
 
     }
