@@ -18,10 +18,10 @@
 
 
     <button class="layui-btn layui-btn-danger">客户列表</button>
-    <button class="layui-btn " onclick="popup('新增客户资料')">新增客户</button>
+    <button class="layui-btn " onclick="popup('新增客户资料','client_add')">新增客户</button>
 
   </div>
-  <table class="layui-table" lay-size="sm" style="margin: 15px;width:98%;">
+  <table class="layui-table" lay-size="sm" id="test" style="margin: 15px;width:98%;">
       <colgroup>
           <col width="150">
           <col width="200">
@@ -29,34 +29,46 @@
       </colgroup>
       <thead>
       <tr>
-          <th>昵称</th>
-          <th>加入时间</th>
-          <th>签名</th>
+          <th>编号</th>
+          <th>客户名称</th>
+          <th>所在地区</th>
+          <th>详细地址</th>
+          <th>客户级别</th>
+          <th>联系人</th>
+          <th>手机号码</th>
+          <th>业务员</th>
+          <th>管理</th>
       </tr>
       </thead>
       <tbody>
+      @foreach( $client as $v )
       <tr>
-          <td>贤心</td>
-          <td>2016-11-29</td>
-          <td>人生就像是一场修行</td>
+          <td>{{$v->client_id}}</td>
+          <td>{{$v->client_name}}</td>
+          <td>{{$map[$v->province].$map[$v->city]}}</td>
+          <td>{{$v->area_detail}}</td>
+          <td>{{$v->client_level}}</td>
+          <td>{{$v->client_contact}}</td>
+
+          <td>{{$v->client_phone}}</td>
+          <td>{{$v->client_contact}}</td>
+          <td>
+              <div class="layui-btn-group">
+
+                  <button class="layui-btn layui-btn-sm" onclick="popup('客户资料修改','client_save?cid={{$v->client_id}}')">修改</button>
+                  <button class="layui-btn layui-btn-sm layui-btn-normal del" cid="{{$v->client_id}}">删除</button>
+              </div>
+          </td>
       </tr>
-      <tr>
-          <td>许闲心</td>
-          <td>2016-11-28</td>
-          <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
-      </tr>
-      <tr>
-          <td>sentsin</td>
-          <td>2016-11-27</td>
-          <td> Life is either a daring adventure or nothing.</td>
-      </tr>
+      @endforeach
+
       </tbody>
   </table>
 
 </body>
 <script>
     //页面层
-    function popup(title){
+    function popup(title,url){
 
         layer.open({
             type: 2,
@@ -65,7 +77,7 @@
             shadeClose: true,
             maxmin: true, //开启最大化最小化按钮
             area: ['1000px', '500px'],
-            content: '/index.php/client_add',
+            content: '/index.php/'+url,
             end: function () {
                 window.location.reload();
             }
@@ -73,6 +85,40 @@
         });
 
     }
+
+    /*
+    * 删除
+    * */
+    $('.del').click(function(){
+        var cid = $(this).attr('cid');
+        $.ajax({
+            url:'client_del',
+            data:{
+                '_token' : '{{csrf_token()}}',
+                'cid' : cid
+            },
+            dataType:'json',
+            type:'post',
+            asyn:false,
+            success:function(json_msg){
+                if(json_msg.code == '1000'){
+
+                    layer.msg(json_msg.font,{icon:6});
+
+                }else{
+
+                    layer.msg(json_msg.font,{icon:5});
+                }
+
+            }
+
+        })
+
+    })
+
+
+
+
 
 
 </script>

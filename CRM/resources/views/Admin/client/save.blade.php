@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-    <title>新增客户</title>
+    <title>修改客户资料</title>
 
     <script type="text/javascript" src="/win10/js/jquery-2.2.4.min.js"></script>
     <link href="/win10/component/layer-v3.0.3/Layui/css/layui.css" rel="stylesheet">
@@ -20,14 +20,14 @@
         <label class="layui-form-label">手机号</label>
 
         <div class="layui-input-inline">
-            <input type="text" name="tel" lay-verify="required" placeholder="请输入" autocomplete="off"
+            <input type="text" name="tel" value="{{$client->client_phone}}" lay-verify="required" placeholder="请输入" autocomplete="off"
                    class="layui-input">
         </div>
 
         <label class="layui-form-label">客户名称</label>
 
         <div class="layui-input-inline">
-            <input type="text" name="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+            <input type="text" name="title" value="{{$client->client_name}}" autocomplete="off" placeholder="请输入标题" class="layui-input">
         </div>
 
     </div>
@@ -38,10 +38,30 @@
 
             <div class="layui-input-block">
                 <select name="type">
-                    <option value="1">已成交</option>
-                    <option value="2">未成交</option>
-                    <option value="3">跟进中</option>
-                    <option value="4">有意向</option>
+                    @if( $client->client_type ==1)
+                        <option value="1" selected="">已成交</option>
+                    @else
+                        <option value="1" selected="">已成交</option>
+                    @endif
+
+                    @if($client->client_type ==2)
+                        <option value="2" selected="">未成交</option>
+                    @else
+                        <option value="2">未成交</option>
+                    @endif
+                    @if($client->client_type ==3)
+                        <option value="3" selected="">跟进中</option>
+                    @else
+                        <option value="3">未成交</option>
+                    @endif
+                    @if($client->client_type ==4)
+                        <option value="4" selected="">有意向</option>
+                    @else
+                        <option value="4">未成交</option>
+                    @endif
+
+
+
                 </select>
             </div>
         </div>
@@ -50,11 +70,28 @@
 
             <div class="layui-input-inline">
                 <select name="level">
-                    <option value="1">vip1</option>
-                    <option value="2">vip2</option>
-                    <option value="3">vip3</option>
-                    <option value="4">vip4</option>
-                    <option value="5">vip5</option>
+                    @if( $client->client_level ==1)
+                        <option value="1"selected="">⭐</option>
+                    @else
+                        <option value="1">⭐</option>
+                    @endif
+
+                    @if($client->client_level ==2)
+                        <option value="2" selected="">⭐⭐</option>
+                    @else
+                        <option value="2">⭐⭐</option>
+                    @endif
+                    @if($client->client_level ==3)
+                        <option value="3" selected="">⭐⭐⭐</option>
+                    @else
+                        <option value="3">⭐⭐⭐</option>
+                    @endif
+                    @if($client->client_level ==4)
+                        <option value="4" selected="">⭐⭐⭐⭐</option>
+                    @else
+                        <option value="4">⭐⭐⭐⭐</option>
+                    @endif
+
                 </select>
             </div>
         </div>
@@ -65,10 +102,28 @@
 
             <div class="layui-input-block">
                 <select name="detail">
-                    <option value="1">电话营销</option>
-                    <option value="2">搜索引擎</option>
-                    <option value="3">朋友介绍</option>
-                    <option value="4">其他来源</option>
+                    @if( $client->client_from ==1)
+                        <option value="1"selected="">电话营销</option>
+                    @else
+                        <option value="1">电话营销</option>
+                    @endif
+
+                    @if($client->client_from ==2)
+                        <option value="2" selected="">搜索引擎</option>
+                    @else
+                        <option value="2">搜索引擎</option>
+                    @endif
+                    @if($client->client_from ==3)
+                        <option value="3" selected="">朋友介绍</option>
+                    @else
+                        <option value="3">朋友介绍</option>
+                    @endif
+                    @if($client->client_from ==4)
+                        <option value="4" selected="">其他来源</option>
+                    @else
+                        <option value="4">其他来源</option>
+                    @endif
+
                 </select>
             </div>
         </div>
@@ -76,7 +131,7 @@
             <label class="layui-form-label">公司名称</label>
 
             <div class="layui-input-inline">
-                <input type="text" name="crop" autocomplete="off" class="layui-input">
+                <input type="text" name="crop" value="{{$client->corp_name}}" autocomplete="off" class="layui-input">
             </div>
         </div>
     </div>
@@ -85,7 +140,7 @@
             <label class="layui-form-label">联系人</label>
 
             <div class="layui-input-block">
-                <input type="text" name="contact" id="date1" autocomplete="off" class="layui-input">
+                <input type="text" name="contact"  value="{{$client->client_contact}}" id="date1" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-inline">
@@ -93,6 +148,28 @@
 
             <div class="layui-input-inline">
                 <select name="position">
+                    @if( $client->client_from ==1)
+                        <option value="1"selected="">电话营销</option>
+                    @else
+                        <option value="1">电话营销</option>
+                    @endif
+
+                    @if($client->client_from ==2)
+                        <option value="2" selected="">搜索引擎</option>
+                    @else
+                        <option value="2">搜索引擎</option>
+                    @endif
+                    @if($client->client_from ==3)
+                        <option value="3" selected="">朋友介绍</option>
+                    @else
+                        <option value="3">朋友介绍</option>
+                    @endif
+                    @if($client->client_from ==4)
+                        <option value="4" selected="">其他来源</option>
+                    @else
+                        <option value="4">其他来源</option>
+                    @endif
+
                     <option value="1">总监</option>
                     <option value="2">业务员</option>
                     <option value="3">董事长</option>
@@ -110,14 +187,22 @@
             <select name="pro" id="pro" lay-filter="test">
                 <option value="1">请选择省</option>
                 @foreach( $region as $v )
+
+                    @if( $v->region_name == $map[$client->province])
+
+                    <option value="{{$v->region_id}}" selected>{{$v->region_name}}</option>
+                    @else
+
                     <option value="{{$v->region_id}}">{{$v->region_name}}</option>
+                    @endif
+
                 @endforeach
 
             </select>
         </div>
         <div class="layui-input-inline">
             <select name="ciy" id="ciy">
-
+                <option value="{{$client->city}}">{{$map[$client->city]}}</option>
             </select>
         </div>
 
@@ -129,7 +214,7 @@
             <label class="layui-form-label">详细地址</label>
 
             <div class="layui-input-block">
-                <input type="text" name="detail" autocomplete="off" class="layui-input">
+                <input type="text" name="detail" value="{{$client->area_detail}}" autocomplete="off" class="layui-input">
             </div>
         </div>
     </div>
@@ -138,7 +223,7 @@
         <label class="layui-form-label">备注</label>
 
         <div class="layui-input-block">
-            <textarea placeholder="请输入内容" class="layui-textarea" name="remark"></textarea>
+            <textarea placeholder="请输入内容" value="{{$client->client_remark}}" class="layui-textarea" name="remark"></textarea>
         </div>
     </div>
     <div class="layui-form-item" style="text-align:center;">
@@ -158,20 +243,23 @@
         form.on('submit(*)', function (data) {
 
             $.ajax({
-                url: 'client_add_db',
+                url: 'client_save_db',
                 data: {
                     '_token': '{{csrf_token()}}',
-                    'arr': data.field
+                     arr:data.field
                 },
                 dataType: 'json',
                 type: 'post',
                 async: false,
                 success: function (json_msg) {
                     if (json_msg.code == '1000') {
+
                         layui.layer.msg(json_msg.font, {icon: 6});
 
                     } else {
+
                         layui.layer.msg(json_msg.font, {icon: 5});
+
                     }
                 }
             });
@@ -208,7 +296,7 @@
 
             });
             //赋值
-            $('#ciy').append(_tr);
+            $('#ciy').html(_tr);
             form.render('select');
 
 
